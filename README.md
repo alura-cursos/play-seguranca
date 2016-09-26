@@ -25,3 +25,4 @@
 7. Email e confirmação de cadastro
   1. Token de confirmação de cadastro
   2. Envio e template de email
+  3. Verificação e liberação
