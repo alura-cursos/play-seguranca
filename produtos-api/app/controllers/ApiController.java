@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import autenticadores.AcessoDaApiAutenticado;
 import daos.ProdutoDAO;
 import models.EnvelopeDeProdutos;
 import models.Produto;
@@ -16,7 +17,9 @@ import play.data.FormFactory;
 import play.data.validation.ValidationError;
 import play.libs.Json;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 
+@Authenticated(AcessoDaApiAutenticado.class)
 public class ApiController extends Controller {
 
 	private static final List<String> ATRIBUTOS = Arrays.asList("id", "titulo", "codigo", "descricao", "tipo", "preco");
@@ -24,17 +27,17 @@ public class ApiController extends Controller {
 	private ProdutoDAO produtoDAO;
 	@Inject
 	private FormFactory formularios;
-
+	
 	public Result todos() {
 		EnvelopeDeProdutos envelopeDeProdutos = new EnvelopeDeProdutos(produtoDAO.todos());
 		return ok(Json.toJson(envelopeDeProdutos));
 	}
-
+	
 	public Result doTipo(String tipo) {
 		EnvelopeDeProdutos envelope = new EnvelopeDeProdutos(produtoDAO.doTipo(tipo));
 		return ok(Json.toJson(envelope));
 	}
-
+	
 	public Result comFiltros() {
 		DynamicForm formulario = formularios.form().bindFromRequest();
 		validaFormulario(formulario);

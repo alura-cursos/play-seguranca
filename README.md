@@ -32,3 +32,4 @@
   3. Autenticação real
 9. Autenticação da API e registro de acesso
   1. Token da API e segurança do usuário
+  2. Autenticação da API no header
