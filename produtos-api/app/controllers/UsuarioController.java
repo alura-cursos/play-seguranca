@@ -3,9 +3,12 @@ package controllers;
 import javax.inject.Inject;
 
 import akka.util.Crypt;
+import models.TokenDeCadastro;
 import models.Usuario;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
 import play.mvc.*;
 import validadores.ValidadorDeUsuario;
 import views.html.*;
@@ -16,6 +19,8 @@ public class UsuarioController extends Controller {
 	private FormFactory formularios;
 	@Inject
 	private ValidadorDeUsuario validadorDeUsuario;
+	@Inject
+	private MailerClient enviador;
 	
 	public Result formularioDeNovoUsuario() {
 		Form<Usuario> formulario = formularios.form(Usuario.class);
@@ -31,6 +36,9 @@ public class UsuarioController extends Controller {
 		String senhaCrypto = Crypt.sha1(usuario.getSenha());
 		usuario.setSenha(senhaCrypto);
 		usuario.save();
+		TokenDeCadastro token = new TokenDeCadastro(usuario);
+		token.save();
+		enviador.send(new Email());
 		flash("success", "Usuário cadastrado com sucesso!");
 		return redirect("/login"); //TODO
 	}
