@@ -6,14 +6,19 @@ import javax.persistence.Id;
 
 import com.avaje.ebean.Model;
 
+import play.data.validation.Constraints.Required;
+
 @Entity
 public class Usuario extends Model {
 
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Required(message = "Você precisa fornecer um nome de tratamento!")
 	private String nome;
+	@Required(message = "Você precisa fornecer um email!")
 	private String email;
+	@Required(message = "Você precisa fornecer uma senha!")
 	private String senha;
 
 	public String getEmail() {

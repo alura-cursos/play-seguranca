@@ -6,6 +6,7 @@
 		@b3.text(formulario("nome"), '_label -> "Nome")
 		@b3.email(formulario("email"), '_label -> "Email")
 		@b3.password(formulario("senha"), '_label -> "Senha")
+		@b3.password(formulario("confirmaSenha"), '_label -> "Confirmação de senha")
 		@b3.submit('class -> "btn btn-primary") { Cadastrar }
 	}
 }
