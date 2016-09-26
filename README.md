@@ -24,3 +24,4 @@
   3. Validação e criptografia
 7. Email e confirmação de cadastro
   1. Token de confirmação de cadastro
+  2. Envio e template de email

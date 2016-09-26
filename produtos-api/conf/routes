@@ -3,8 +3,6 @@ POST /produto/novo                   controllers.ProdutoController.salvaNovoProd
 
 GET  /usuario/novo                   controllers.UsuarioController.formularioDeNovoUsuario
 POST /usuario/novo                   controllers.UsuarioController.salvaNovoUsuario
-
-
 # API
 GET  /api/produtos                   controllers.ApiController.comFiltros
 GET  /api/produtos/todos             controllers.ApiController.todos
