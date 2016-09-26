@@ -20,8 +20,8 @@ public class UsuarioAutenticado extends Authenticator {
 	private UsuarioDAO usuarioDAO;
 	@Override
 	public String getUsername(Context context) {
-		String email = context.session().get(AUTH);
-		Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
+		String codigo = context.session().get(AUTH);
+		Optional<Usuario> possivelUsuario = usuarioDAO.comToken(codigo);
 		if (possivelUsuario.isPresent()) {
 			return possivelUsuario.get().getNome();
 		}

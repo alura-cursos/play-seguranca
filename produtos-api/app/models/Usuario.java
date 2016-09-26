@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.avaje.ebean.Model;
 
@@ -21,6 +22,8 @@ public class Usuario extends Model {
 	@Required(message = "Você precisa fornecer uma senha!")
 	private String senha;
 	private boolean verificado;
+	@OneToOne(mappedBy = "usuario")
+	private TokenDaApi token;
 
 	public String getEmail() {
 		return email;
@@ -60,6 +63,14 @@ public class Usuario extends Model {
 
 	public void setVerificado(boolean verificado) {
 		this.verificado = verificado;
+	}
+
+	public TokenDaApi getToken() {
+		return token;
+	}
+
+	public void setToken(TokenDaApi token) {
+		this.token = token;
 	}
 
 }

@@ -24,17 +24,17 @@ public class ApiController extends Controller {
 	private ProdutoDAO produtoDAO;
 	@Inject
 	private FormFactory formularios;
-	
+
 	public Result todos() {
 		EnvelopeDeProdutos envelopeDeProdutos = new EnvelopeDeProdutos(produtoDAO.todos());
 		return ok(Json.toJson(envelopeDeProdutos));
 	}
-	
+
 	public Result doTipo(String tipo) {
 		EnvelopeDeProdutos envelope = new EnvelopeDeProdutos(produtoDAO.doTipo(tipo));
 		return ok(Json.toJson(envelope));
 	}
-	
+
 	public Result comFiltros() {
 		DynamicForm formulario = formularios.form().bindFromRequest();
 		validaFormulario(formulario);
