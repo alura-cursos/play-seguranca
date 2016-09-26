@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import acoes.AcaoDeRegistroDeAcesso;
 import autenticadores.AcessoDaApiAutenticado;
 import daos.ProdutoDAO;
 import models.EnvelopeDeProdutos;
@@ -20,6 +21,7 @@ import play.mvc.*;
 import play.mvc.Security.Authenticated;
 
 @Authenticated(AcessoDaApiAutenticado.class)
+@With(AcaoDeRegistroDeAcesso.class)
 public class ApiController extends Controller {
 
 	private static final List<String> ATRIBUTOS = Arrays.asList("id", "titulo", "codigo", "descricao", "tipo", "preco");

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import daos.UsuarioDAO;
 import models.Usuario;
 import play.mvc.Result;
+import play.Logger;
 import play.libs.Json;
 import play.mvc.Http.Context;
 import play.mvc.Security.Authenticator;

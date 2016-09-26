@@ -1,8 +1,11 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.avaje.ebean.Model;
@@ -24,6 +27,8 @@ public class Usuario extends Model {
 	private boolean verificado;
 	@OneToOne(mappedBy = "usuario")
 	private TokenDaApi token;
+	@OneToMany(mappedBy = "usuario")
+	private List<RegistroDeAcesso> acessos;
 
 	public String getEmail() {
 		return email;
@@ -71,6 +76,14 @@ public class Usuario extends Model {
 
 	public void setToken(TokenDaApi token) {
 		this.token = token;
+	}
+
+	public List<RegistroDeAcesso> getAcessos() {
+		return acessos;
+	}
+
+	public void setAcessos(List<RegistroDeAcesso> acessos) {
+		this.acessos = acessos;
 	}
 
 }
