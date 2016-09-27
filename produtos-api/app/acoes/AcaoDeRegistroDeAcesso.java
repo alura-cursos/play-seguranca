@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import daos.UsuarioDAO;
 import models.RegistroDeAcesso;
 import models.Usuario;
-import play.Logger;
 import play.mvc.Action;
 import play.mvc.Http.Context;
 import play.mvc.Result;
@@ -25,6 +24,5 @@ public class AcaoDeRegistroDeAcesso extends Action.Simple {
 		acesso.save();
 		return delegate.call(context);
 	}
-
 	
 }

@@ -29,6 +29,7 @@ public class Usuario extends Model {
 	private TokenDaApi token;
 	@OneToMany(mappedBy = "usuario")
 	private List<RegistroDeAcesso> acessos;
+	private boolean admin;
 
 	public String getEmail() {
 		return email;
@@ -84,6 +85,14 @@ public class Usuario extends Model {
 
 	public void setAcessos(List<RegistroDeAcesso> acessos) {
 		this.acessos = acessos;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 }

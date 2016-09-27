@@ -1,0 +1,34 @@
+@(usuarios: List[Usuario])
+@main("Lista de usuários") {
+  <section class="panel panel-default">
+    <header class="panel-heading">
+      <h2 class="panel-title">Lista de usuários</h2>
+    </header>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Email</td>
+            <td>Token</td>
+            <td>Acessos</td>
+            <td>Último acesso</td>
+          </tr>
+        </thead>
+        <tbody>
+          @for(usuario <- usuarios) {
+         <tr>
+            <td>@usuario.getId()</td>
+            <td>@usuario.getNome()</td>
+            <td>@usuario.getEmail()</td>
+            <td>@usuario.getToken().getCodigo()</td>
+            <td>@usuario.getAcessos().size()</td>
+            <td>@usuario.getAcessos().get(usuario.getAcessos().size()-1).getData()</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+}

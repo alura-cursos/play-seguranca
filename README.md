@@ -34,3 +34,5 @@
   1. Token da API e segurança do usuário
   2. Autenticação da API no header
   3. Registro de acesso com Actions
+10. Área de administração
+  1. Listagens e autenticação

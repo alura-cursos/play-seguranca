@@ -1,3 +1,6 @@
+GET  /admin/usuarios                  controllers.AdminController.usuarios
+GET  /admin/produtos                  controllers.AdminController.produtos
+
 GET  /produto/novo                    controllers.ProdutoController.formularioDeNovoProduto
 POST /produto/novo                    controllers.ProdutoController.salvaNovoProduto
 

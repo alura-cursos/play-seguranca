@@ -2,13 +2,16 @@ package controllers;
 
 import javax.inject.Inject;
 
+import autenticadores.AdminAutenticado;
 import models.Produto;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 import validadores.ValidadorDeProduto;
 import views.html.*;
 
+@Authenticated(AdminAutenticado.class)
 public class ProdutoController extends Controller {
 
 	@Inject
