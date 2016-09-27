@@ -23,7 +23,9 @@ public class UsuarioAutenticado extends Authenticator {
 		String codigo = context.session().get(AUTH);
 		Optional<Usuario> possivelUsuario = usuarioDAO.comToken(codigo);
 		if (possivelUsuario.isPresent()) {
-			return possivelUsuario.get().getNome();
+			Usuario usuario = possivelUsuario.get();
+			context.args.put("usuario", usuario);
+			return usuario.getNome();
 		}
 		return null;
 	}

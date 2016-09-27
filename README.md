@@ -36,3 +36,4 @@
   3. Registro de acesso com Actions
 10. Área de administração
   1. Listagens e autenticação
+  2. Contexto e métodos nas views

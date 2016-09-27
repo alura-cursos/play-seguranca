@@ -24,6 +24,7 @@ public class AdminAutenticado extends Authenticator {
 		if (possivelUsuario.isPresent()) {
 			Usuario usuario = possivelUsuario.get();
 			if (usuario.isAdmin()) {
+				context.args.put("usuario", usuario);
 				return usuario.getNome();
 			}
 		}

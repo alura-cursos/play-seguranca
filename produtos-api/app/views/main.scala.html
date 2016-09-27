@@ -1,4 +1,9 @@
 @(title: String)(content: Html)
+
+@usuario() = @{
+	Http.Context.current().args.get("usuario").asInstanceOf[Usuario]
+}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,11 +16,12 @@
 	    	<header class="navbar navbar-default">
 		  <div class="container" role="presentation">
 		    <ul class="nav navbar-nav navbar-right">
-		      <li>
-		        <a href="@routes.ProdutoController.formularioDeNovoProduto">Novo produto</a>
-		      </li>
-		      @if(request().username()) {
+		      @if(usuario() != null) {
 			      <li><a href="@routes.UsuarioController.painel">Painel</a></li>
+			      @if(usuario().isAdmin()) {
+			      <li><a href="@routes.AdminController.usuarios">Usuários</a></li>
+			      <li><a href="@routes.AdminController.produtos">Produtos</a></li>
+			      }
 			      <li><a href="@routes.UsuarioController.fazLogout">Logout</a></li>
 		      }
 		    </ul>

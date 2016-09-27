@@ -1,4 +1,8 @@
 @(produtos: List[Produto])
+
+@formataEmReais(preco: Double) = @{
+	String.format("R$%.2f", preco)
+}
 @main("Lista de produtos") {
   <section class="panel panel-default">
     <header class="panel-heading">
@@ -25,7 +29,7 @@
             <td>@produto.getCodigo()</td>
             <td>@produto.getTipo()</td>
             <td>@produto.getDescricao()</td>
-            <td>R$ @produto.getPreco()</td>
+            <td>@formataEmReais(produto.getPreco())</td>
           </tr>
           }
         </tbody>
