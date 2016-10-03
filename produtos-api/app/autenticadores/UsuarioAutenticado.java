@@ -28,7 +28,7 @@ public class UsuarioAutenticado extends Authenticator {
 		Usuario usuario = possivelUsuario.get();
 		return usuario.getEmail();
 	}
-	
+
 	@Override
 	public Result onUnauthorized(Context context) {
 		context.flash().put("danger", "Não autorizado!");

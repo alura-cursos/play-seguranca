@@ -19,13 +19,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import validadores.ValidadorDeUsuario;
-import views.html.formularioDeLogin;
-import views.html.formularioDeNovoUsuario;
+import views.html.*;
 
 public class UsuarioController extends Controller {
 
 	public static final String AUTH = "AUTH";
-	
 	@Inject
 	private FormFactory formularios;
 	@Inject
@@ -69,7 +67,7 @@ public class UsuarioController extends Controller {
 				usuario.setVerificado(true);
 				usuario.update();
 				flash("success", "Cadastro confirmado com sucesso!");
-				// TODO fazer login
+				session(AUTH, usuario.getEmail());
 				return redirect(routes.UsuarioController.painel());
 			}
 		}
@@ -77,33 +75,46 @@ public class UsuarioController extends Controller {
 		return redirect(routes.UsuarioController.formularioDeLogin());
 	}
 	
-	public Result fazLogin() {
-		DynamicForm formulario = formularios.form().bindFromRequest();
-		String email = formulario.get("email");
-		String senhaCriptografada = Crypt.sha1(formulario.get("senha"));
-		Optional<Usuario> possivelUsuario = usuarioDAO.comEmailESenha(email, senhaCriptografada);
-		if (possivelUsuario.isPresent()) {
-			Usuario usuario = possivelUsuario.get();
-			if (usuario.isVerificado()) {
-				session(AUTH, usuario.getEmail());
-				flash("success", "Login efetuado com suceeso");
-				return redirect(routes.UsuarioController.painel());
-			}
-			else {
-				flash("danger", "Usuário não confirmado");
-			}
-		}
-		flash("warning", "Credenciais inválidas");
-		return redirect(routes.UsuarioController.formularioDeLogin());
-	}
-	
 	public Result formularioDeLogin() {
 		return ok(formularioDeLogin.render(formularios.form()));
 	}
 	
+	public Result fazLogin() {
+		DynamicForm formulario = formularios.form().bindFromRequest();
+		String email = formulario.get("email");
+		String senha = Crypt.sha1(formulario.get("senha"));
+		Optional<Usuario> possivelUsuario = usuarioDAO.comEmailESenha(email, senha);
+		if (possivelUsuario.isPresent()) {
+			Usuario usuario = possivelUsuario.get();
+			if (usuario.isVerificado()) {
+				session(AUTH, usuario.getEmail());
+				flash("success", "Login foi efetuado com sucesso!");
+				return redirect(routes.UsuarioController.painel());
+			}
+			else {
+				flash("warning", "Usuário ainda não confirmado! Confirma seu email!");
+			}
+		}
+		else {
+			flash("danger", "Credenciais inválidas!");
+		}
+		return redirect(routes.UsuarioController.formularioDeLogin());
+	}
+	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result painel() {
-		return ok("painel do usuario");
+		return ok(painel.render());
 	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result fazLogout() {
+		session().clear();
+		flash("success", "Logout efetuado com sucesso!");
+		return redirect(routes.UsuarioController.formularioDeLogin());
+	}
+	
+	
+	
+	
 	
 }

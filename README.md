@@ -28,3 +28,4 @@
   3. Verificação e liberação
 8. Autenticação - login e logout
   1. Autenticação e login
+  2. Logout
