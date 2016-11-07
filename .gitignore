@@ -1,0 +1,11 @@
+produtos-api/logs
+produtos-api/target
+produtos-api/project/project
+produtos-api/project/target
+produtos-api/.idea
+produtos-api/.idea_modules
+produtos-api/.classpath
+produtos-api/.project
+produtos-api/.settings
+produtos-api/RUNNING_PID
+produtos-api/bin
